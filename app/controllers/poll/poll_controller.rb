@@ -2,14 +2,13 @@ module Poll
   class PollController < Poll::ApplicationController
     layout 'application'
     helper Poll::ApplicationHelper::FormHelper
+    before_filter :load_poll
 
     def show
-      @poll = Poll::Item.find_by_url!(params[:slug])
       @entry = Poll::Entry.new
     end
 
     def new
-      @poll = Poll::Item.find_by_url!(params[:slug])
       create_poll_entry
 
       if @entry.save
@@ -20,16 +19,18 @@ module Poll
     end
 
     def thanks
-      @poll = Poll::Item.find_by_url!(params[:slug])
     end
 
     def terms
-      @poll = Poll::Item.find_by_url!(params[:slug])
     end
 
     private
+    def load_poll
+      @poll = Poll::Item.find_by_url!(params[:slug])
+    end
+
     def create_poll_entry
-      @entry = Poll::Entry.new
+      @entry = Poll::Entry.new(params[:entry])
       @entry.item_id = @poll.id
       @entry.ip_address = request.remote_ip
 

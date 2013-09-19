@@ -11,11 +11,16 @@ module Poll
     accepts_nested_attributes_for :entry_fields,    :allow_destroy => true
 
     validate                      :validate
-    validates_acceptance_of       :agree_terms, :message => I18n.t('poll.accept_terms'),
-                                                unless: 'item.terms_and_conditions.nil?'
+    validates_acceptance_of       :agree_terms,     :allow_nil => false,
+                                                    :message => I18n.t('poll.accept_terms'),
+                                                    if: :terms?
+
+    def terms?
+      !item.terms_and_conditions.nil?
+    end
 
     def validate
-      self.item.fields.each do |field|
+      item.fields.each do |field|
         check_mandatory_field(field) if field.required
       end
     end
@@ -31,11 +36,11 @@ module Poll
     end
 
     def blank_fields
-      self.entry_fields.select { |entry_field| entry_field.field_value.length < 1 }
+      entry_fields.select { |entry_field| entry_field.field_value.length < 1 }
     end
 
     def all_field_ids
-      self.entry_fields.map { |entry_field| entry_field.field_id }
+      entry_fields.map { |entry_field| entry_field.field_id }
     end
   end
 end
