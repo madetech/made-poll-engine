@@ -22,6 +22,7 @@ module Poll
     end
 
     def terms
+      raise ActionController::RoutingError.new('Not Found') unless @poll.terms_and_conditions_required?
     end
 
     private

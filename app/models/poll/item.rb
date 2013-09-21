@@ -27,6 +27,10 @@ module Poll
 
     acts_as_url                   :title
 
+    def terms_and_conditions_required?
+      not terms_and_conditions.nil? and terms_and_conditions.length > 0
+    end
+
     def to_param
       url
     end

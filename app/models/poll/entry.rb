@@ -17,7 +17,7 @@ module Poll
                                                     if: :terms_and_conditions_required?
 
     def terms_and_conditions_required?
-      item.terms_and_conditions.length > 0
+      item.terms_and_conditions_required?
     end
 
     def validate
