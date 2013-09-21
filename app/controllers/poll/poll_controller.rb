@@ -5,7 +5,7 @@ module Poll
     before_filter :load_poll
 
     def show
-      @entry = Poll::Entry.new
+      @entry = Poll::Entry.new(:item => @poll)
     end
 
     def new

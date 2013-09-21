@@ -1,6 +1,7 @@
 module Poll
   class Entry < ActiveRecord::Base
-    attr_accessible               :ip_address,
+    attr_accessible               :item,
+                                  :ip_address,
                                   :entry_fields_attributes,
                                   :agree_terms
 
@@ -13,10 +14,10 @@ module Poll
     validate                      :validate
     validates_acceptance_of       :agree_terms,     :allow_nil => false,
                                                     :message => I18n.t('poll.accept_terms'),
-                                                    if: :terms?
+                                                    if: :terms_and_conditions_required?
 
-    def terms?
-      !item.terms_and_conditions.nil?
+    def terms_and_conditions_required?
+      item.terms_and_conditions.length > 0
     end
 
     def validate

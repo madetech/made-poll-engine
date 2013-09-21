@@ -32,6 +32,8 @@ if defined?(ActiveAdmin)
         f.input :image,         :wrapper_html => { :class => "default" },
                                 :as => :file,
                                 :hint => f.template.image_tag(f.object.image.url(:thumb))
+
+        f.input :active
       end
 
       f.inputs "Text Fields" do
@@ -39,6 +41,7 @@ if defined?(ActiveAdmin)
           field.input :title
           field.input :order
           field.input :required
+          field.input :_destroy, :as => :boolean, :label => "Delete"
         end
       end
 
@@ -53,6 +56,7 @@ if defined?(ActiveAdmin)
             f_field.input :title
             f_field.input :order
             f_field.input :required
+            f_field.input :_destroy, :as => :boolean, :label => "Delete"
 
             f_field.has_many :options do |option|
               option.input :label
@@ -60,8 +64,6 @@ if defined?(ActiveAdmin)
 
               option.input :_destroy, :as => :boolean, :label => "Delete"
             end
-
-            f_field.input :_destroy, :as => :boolean, :label => "Delete"
           end
         end
       end

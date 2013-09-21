@@ -3,6 +3,7 @@ module Poll
     attr_accessible               :title,
                                   :intro,
                                   :image,
+                                  :active,
                                   :thanks_title,
                                   :thanks_page,
                                   :terms_and_conditions,
