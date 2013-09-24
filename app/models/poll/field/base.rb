@@ -8,6 +8,10 @@ module Poll
 
       default_scope     :order => '`order` ASC'
 
+      def multiple?
+        false
+      end
+
       def template
         type.downcase!.demodulize
       end

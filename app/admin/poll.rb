@@ -84,5 +84,15 @@ if defined?(ActiveAdmin)
 
       f.actions
     end
+
+    action_item :only => :show do
+      link_to "Download Entries", entries_admin_poll_item_path(params[:id], :format => :csv)
+    end
+
+    member_action :entries do
+      respond_to do |format|
+        format.csv { render text: Poll::Item.find_by_url(params[:id]).export_entries_csv }
+      end
+    end
   end
 end

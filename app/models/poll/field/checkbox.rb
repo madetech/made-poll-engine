@@ -6,6 +6,10 @@ module Poll
       has_many  :options, :foreign_key => 'field_id'
 
       accepts_nested_attributes_for :options, :allow_destroy => true
+
+      def multiple?
+        true
+      end
     end
   end
 end
