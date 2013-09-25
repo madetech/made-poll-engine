@@ -4,6 +4,12 @@ module Poll
   mattr_accessor :cache_sweeper
   @@cache_sweeper = false
 
+  mattr_accessor :engine_routing
+  @@engine_routing = false
+
+  mattr_accessor :engine_active_admin
+  @@engine_active_admin = true
+
   mattr_accessor :image_styles
   @@image_styles = {:large => ["466x377#", :jpg], :thumb => ["70x70#", :jpg]}
 

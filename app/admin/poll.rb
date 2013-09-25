@@ -1,4 +1,4 @@
-if defined?(ActiveAdmin)
+if defined?(ActiveAdmin) and Poll.config.engine_active_admin
   ActiveAdmin.register Poll::Item do
     controller do
       cache_sweeper Poll.config.cache_sweeper if Poll.config.cache_sweeper
