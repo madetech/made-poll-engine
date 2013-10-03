@@ -14,7 +14,7 @@ module Poll
     validate                      :validate
     validates_acceptance_of       :agree_terms,     :allow_nil => false,
                                                     :message => I18n.t('poll.accept_terms'),
-                                                    if: :terms_and_conditions_required?
+                                                    :if => :terms_and_conditions_required?
 
     def terms_and_conditions_required?
       item.terms_and_conditions_required?
